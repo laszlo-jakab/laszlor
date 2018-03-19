@@ -9,6 +9,8 @@
 #' @return A data.table of regression coefficients, standard errors (or t-stats), R-squared, number of observations. Standard errors (or t-stats) are labelled starting with "_SE_". If available (e.g. for an felm object), the R-squared of the projected model is displayed, or, if a 2SLS model is estimated via felm, the F-statistic of the first stage (instead of R-squareds in this case).
 #' 
 #' @export
+#' 
+#' @import data.table
 #'
 #' @examples
 #' reg.results <- lm(mpg ~ disp + hp, mtcars)

@@ -12,6 +12,8 @@
 #' @return A data.table of regression 
 #' 
 #' @export
+#' 
+#' @import data.table
 #'
 #' @examples
 #' reg.models <- c("mpg ~ disp", "mpg ~ disp + hp", "mpg ~ disp + hp + wt")

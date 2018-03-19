@@ -3,3 +3,4 @@
 export(PvalToStar)
 export(RegTable)
 export(RegToDT)
+import(data.table)
