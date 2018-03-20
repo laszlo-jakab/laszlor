@@ -26,7 +26,7 @@ RegTable(reg.list, digits = 3, fe.list = NULL, coef.lab.dt = NULL,
 \item{sig.symbols}{Significance stars to be displayed.}
 }
 \value{
-A data.table of regression
+A formatted data.table of regression output containing coefficients, standard errors, number of observations and R-squared (or first-stage F-stat if an instrumental variables specification is supplied to felm). If the regression includes partialled-out fixed effects, the R-squared of the projected model is also displayed. Lables for fixed effects are also displayed if supplied by the user.
 }
 \description{
 Convert List of Results to Regression Table
