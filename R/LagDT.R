@@ -66,13 +66,13 @@ LagDT <- function(dt, x,
     warning("The date variable you fed the function is not of class 'Date' (standard date format) or 'yearmon' (from the zoo package). I have not tested the function on such date formats. As long as adding '1' to your date shifts time by one period, you should be fine. Otherwise, the function will shift time by more or less than you intended.")
   }
 
-  # loop through shift extents
+  # loop through shift values
   for (s in shift.by) {
     # name lag/lead variables to be generated
     # lags: add ".l" followed by number of periods shifted
     if (s > 0) {
       x.shift <- paste0(x, ".l", s)
-      # leads: add ".f" followed by
+      # leads: add ".f" followed by number of periods shifted
     } else {
       x.shift <- paste0(x, ".f", abs(s))
     }
