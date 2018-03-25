@@ -19,7 +19,7 @@ RegToDT(reg.model, digits = 3, print.tstat = FALSE, sig.levels = c(0.01,
 \item{sig.symbols}{Significance symbols to assign. Should be in descending order of significance.}
 }
 \value{
-A data.table of regression coefficients, standard errors (or t-stats), R-squared, number of observations. Standard errors (or t-stats) are labelled starting with "_SE_". If available (e.g. for an felm object), the R-squared of the projected model is displayed, or, if a 2SLS model is estimated via felm, the F-statistic of the first stage (instead of R-squareds in this case).
+A data.table of regression coefficients, standard errors (or t-stats), R-squared, number of observations. Standard errors (or t-stats) are labelled starting with "_SE_". If available (e.g. for an felm object), the R-squared of the projected model is displayed. If a 2SLS model is estimated via felm, the F-statistic of the first stage is displayed instead of R-squareds.
 }
 \description{
 Output Regression Results to data.table

@@ -65,9 +65,8 @@ RegTable <- function(reg.list,
     # identify if row is a standard deviation (or tstat)
     , is.SE := grepl("^_SE", Variable)]
 
-  # observations, R2
-  obs.r2 <- reg.table[Variable %in%
-    c("Observations", "$R^2$", "$R^2$ (proj. model)", "F (first stage)")]
+  # observations, R2, fist stage F-stat
+  obs.r2 <- reg.table[grepl("^Observations|^$R^2$|^F \\(first stage\\)", Variable)]
 
   # custom coefficient labels and ordering
   if (!is.null(coef.lab.dt)) {

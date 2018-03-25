@@ -6,7 +6,7 @@
 #' @param sig.levels Significance levels based on which stars should be assigned, if any.
 #' @param sig.symbols Significance symbols to assign. Should be in descending order of significance.
 #'
-#' @return A data.table of regression coefficients, standard errors (or t-stats), R-squared, number of observations. Standard errors (or t-stats) are labelled starting with "_SE_". If available (e.g. for an felm object), the R-squared of the projected model is displayed, or, if a 2SLS model is estimated via felm, the F-statistic of the first stage (instead of R-squareds in this case).
+#' @return A data.table of regression coefficients, standard errors (or t-stats), R-squared, number of observations. Standard errors (or t-stats) are labelled starting with "_SE_". If available (e.g. for an felm object), the R-squared of the projected model is displayed. If a 2SLS model is estimated via felm, the F-statistic of the first stage is displayed instead of R-squareds.
 #' 
 #' @export
 #' 
@@ -53,9 +53,9 @@ RegToDT <- function(reg.model,
     }
 
     # first stage F-stat, if available
-    if (!is.null(reg.model.sum$E.fstat)) {
-      out.Fstat <- formatC(
-        round(reg.model.sum$E.fstat[["F"]], 1), 1, format = "f")
+    if (!is.null(reg.model$stage1)) {
+      out.Fstat <- formatC(round(unlist(lapply(
+	    reg.model$stage1$iv1fstat, function(x) x["F"])), 1), 1, format = "f")
     }
 
     # coefficients, with significance stars
@@ -81,9 +81,14 @@ RegToDT <- function(reg.model,
     out.lab  <- c(out.vars, "Observations")
 
     # if first stage F-stat is available, report it instead of R^2
-    if (!is.null(reg.model.sum$E.fstat)) {
+    if (!is.null(reg.model$stage1)) {
       out.body <- c(out.body, out.Fstat)
-      out.lab  <- c(out.lab, "F (first stage)")
+	  if (length(out.Fstat) == 1) {
+        out.lab  <- c(out.lab, "F (first stage)")
+	  } else {
+	    out.lab <- c(out.lab, paste0("F (first stage): ", 
+		  names(reg.model$stage1$iv1fstat)))
+	  }
     # if no first stage F-stat, report R^2
     } else {
       out.body <- c(out.body, out.r2)
