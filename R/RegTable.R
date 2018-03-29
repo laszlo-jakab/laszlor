@@ -8,11 +8,11 @@
 #' @param print.tstat Should t-stats be displayed instead of standard errors?
 #' @param sig.levels Levels for which significance stars should be assigned, if any. Default is 1\%, 5\%, 10\%.
 #' @param sig.symbols Significance stars to be displayed.
-#' 
+#'
 #' @return A formatted data.table of regression output containing coefficients, standard errors, number of observations and R-squared (or first-stage F-stat if an instrumental variables specification is supplied to felm). If the regression includes partialled-out fixed effects, the R-squared of the projected model is also displayed. Lables for fixed effects are also displayed if supplied by the user.
-#' 
+#'
 #' @export
-#' 
+#'
 #' @import data.table
 #'
 #' @examples
@@ -57,8 +57,8 @@ RegTable <- function(reg.list,
   }
 
   # coefficients and sd
-  coef.sd <- reg.table[!Variable %in%
-    c("Observations", "$R^2$", "$R^2$ (proj. model)", "F (first stage)")]
+  coef.sd <- reg.table[
+    !grepl("^Observations|^\\$R\\^2\\$|^F \\(first stage\\)", Variable)]
   coef.sd[
     # group by variable
     , coef.grp := gsub("^_SE_", "", Variable)][
@@ -66,7 +66,8 @@ RegTable <- function(reg.list,
     , is.SE := grepl("^_SE", Variable)]
 
   # observations, R2, fist stage F-stat
-  obs.r2 <- reg.table[grepl("^Observations|^$R^2$|^F \\(first stage\\)", Variable)]
+  obs.r2 <- reg.table[
+    grepl("^Observations|^\\$R\\^2\\$|^F \\(first stage\\)", Variable)]
 
   # custom coefficient labels and ordering
   if (!is.null(coef.lab.dt)) {
