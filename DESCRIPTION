@@ -1,7 +1,7 @@
 Package: laszlor
 Type: Package
 Title: Various Utilities I Use
-Version: 0.1.2.1
+Version: 0.1.2.2
 Author: László Jakab
 Maintainer: László Jakab <laszlo.jakab@chicagobooth.edu>
 Description: Package includes a collection of convenience functions I use. 
